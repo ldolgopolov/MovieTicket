@@ -1,0 +1,140 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard {
+    background-color: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #dee2e6;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.search-form {
+    display: flex;
+}
+
+.search-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+.theme-toggle {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+
+body.dark {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark .dashboard {
+    background-color: #495057;
+}
+
+body.dark .search-form input {
+    background-color: #6c757d;
+    color: #f8f9fa;
+    border: 1px solid #adb5bd;
+}
+
+body.dark .search-form button,
+body.dark .theme-toggle {
+    background-color: #007bff;
+}
+
+body.dark table {
+    background-color: #495057;
+}
+
+body.dark th {
+    background-color: #6c757d;
+}
+
+body.dark tr {
+    border: 1px solid #adb5bd;
+}
+
+body.dark tr:nth-child(even) {
+    background-color: #545b62;
+}
+
+body.dark tr:hover {
+    background-color: #6c757d;
+}
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PopCornTime</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color, white);
+            color: var(--text-color, black);
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--dashboard-bg-color, #f0f0f0);
+            color: var(--dashboard-text-color, black);
+        }
+        
+        .search-form {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .dashboard input {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .dashboard button {
+            padding: 10px 15px;
+            background-color: #5b8dea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .dashboard button:hover {
+            background-color: #1f39ff;
+        }
+
+        .theme-switcher {
+            cursor: pointer;
+            padding: 10px;
+            color: black;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .session-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: var(--bg-color, white);
+        }
+
+        .session-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: black;
+            background-color: var(--session-card-bg-color, #f9f9f9);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .session-card h2 {
+            margin-top: 0;
+        }
+
+        .session-card p {
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .session-card .details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .session-card .card-content {
+            flex-grow: 1;
+        }
+
+        .session-card button.book-ticket {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .session-card button.book-ticket:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>PopCornTime</h1>
+        <div>
+            <form method="GET" class="search-form">
+            <input type="text" name="search" value="{{ query }}" placeholder="Meklēt pēc filmas nosaukumu">
+            <button type="submit">🔍︎</button>
+            </form>
+        </div>
+        <div>
+            <label class="theme-switcher" onclick="switchTheme()">🔄</label>
+        </div>
+    </div>
+    
+    <div class="session-container">
+        {% for session in sessions %}
+            <div class="session-card">
+                <div class="card-content">
+                    <h2>{{ session.movie.title }}</h2>
+                    <p class="details">
+                        <span><strong>Sākums:</strong> {{ session.start_time|date:"H:i" }}</span>
+                        <span><strong>Beigas:</strong> {{ session.end_time|date:"H:i" }}</span>
+                    </p>
+                    <p><strong>Zalē:</strong> {{ session.hall.name }}</p>
+                    <p><strong>Skatītāji:</strong> {{ session.viewers }} / {{ session.hall.max_seats }}</p>
+                    <p class="price"><strong>Cena:</strong> {{ session.price }} €</p>
+                    <p><strong>Apraksts:</strong></p> 
+                    <p>{{ session.movie.description }}</p>
+                </div>
+                <button class="book-ticket">Pirkt biļeti</button>
+            </div>
+        {% empty %}
+            <p>No sessions found.</p>
+        {% endfor %}
+    </div>
+   
+    <script>
+        function switchTheme() {
+            const root = document.documentElement;
+            const currentBgColor = root.style.getPropertyValue('--bg-color');
+
+            if (currentBgColor === 'white') {
+                
+                root.style.setProperty('--bg-color', '#696969');
+                root.style.setProperty('--text-color', 'white');
+                root.style.setProperty('--dashboard-bg-color', 'black');
+                root.style.setProperty('--dashboard-text-color', 'white');
+                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
+            } else {
+                
+                root.style.setProperty('--bg-color', 'white');
+                root.style.setProperty('--text-color', 'black');
+                root.style.setProperty('--dashboard-bg-color', '#f0f0f0');
+                root.style.setProperty('--dashboard-text-color', 'black');
+                root.style.setProperty('--session-card--bg-color', '#f9f9f9');
+            }
+        }
+    </script>
+</body>
+</html>

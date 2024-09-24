@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie, Session, Employee, User, Ticket
+from .models import Movie, Session, Employee, User, Ticket, Hall
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -8,7 +8,7 @@ class MovieAdmin(admin.ModelAdmin):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'movie', 'start_time', 'end_time')
+    list_display = ('id', 'hall', 'viewers', 'movie', 'start_time', 'end_time')
     search_fields = ('movie__title',)
 
 @admin.register(Employee)
@@ -25,3 +25,8 @@ class UserAdmin(admin.ModelAdmin):
 class TicketAdmin(admin.ModelAdmin):
     list_display = ('id', 'session', 'expiration_time')
     search_fields = ('session__movie__title',)
+
+@admin.register(Hall)
+class HallAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'max_seats')
+    search_fields = ('name',)
