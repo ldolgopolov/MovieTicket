@@ -8,7 +8,7 @@ class MovieAdmin(admin.ModelAdmin):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'hall', 'viewers', 'movie', 'start_time', 'end_time')
+    list_display = ('id', 'hall', 'viewers', 'movie', 'start_time')
     search_fields = ('movie__title',)
 
 @admin.register(Employee)

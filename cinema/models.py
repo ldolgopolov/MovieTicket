@@ -22,9 +22,14 @@ class Session(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     viewers = models.PositiveIntegerField(default=0)
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True, blank=True)
+    def save(self, *args, **kwargs):
+        if not self.end_time:
+            self.end_time = self.start_time + self.movie.duration
+            super().save(*args, **kwargs)
+
     def __str__(self):
-        return f'{self.movie.title} ({self.start_time} - {self.end_time})'
+        return f'{self.movie.title} {self.start_time}'
     
 class Employee(models.Model):
     first_name = models.CharField(max_length=100)
@@ -45,6 +50,9 @@ class User(models.Model):
     
 class Ticket(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    seat = models.PositiveIntegerField(null=True)
+    purchase_time = models.DateTimeField(auto_now_add=True, null=True)
     expiration_time = models.DateTimeField()
     def __str__(self):
         return f'Ticket for {self.session.movie.title} (Session: {self.session.start_time})'

@@ -2,15 +2,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: var(--bg-color, white);
+    color: var(--text-color, black);
 }
 
 .dashboard {
-    background-color: #f8f9fa;
-    padding: 20px;
+    border-bottom: 2px solid #dee2e6;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #dee2e6;
+    padding: 20px;
+    background-color: var(--dashboard-bg-color, #f0f0f0);
+    color: var(--dashboard-text-color, black);
 }
 
 h1 {
@@ -20,6 +23,9 @@ h1 {
 
 .search-form {
     display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .search-form input {
@@ -138,3 +144,100 @@ body.dark tr:hover {
     background-color: #6c757d;
 }
 
+.title-logo {
+    display: flex;
+    align-items: center;
+}
+
+.title-logo h1 {
+    margin-right: 10px;
+}
+
+.cinema-logo {
+    width: 50px;
+    height: auto;
+}
+
+
+.dashboard input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.dashboard button {
+    padding: 10px 15px;
+    background-color: #5b8dea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dashboard button:hover {
+    background-color: #1f39ff;
+}
+
+.theme-switcher {
+    cursor: pointer;
+    padding: 10px;
+    color: black;
+    background-color: var(--theme-switcher-bg-color, #f0f0f0);
+}
+
+.session-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: var(--bg-color, white);
+}
+
+.session-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: black;
+    background-color: var(--session-card-bg-color, #f9f9f9);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    margin: 15px;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.session-card h2 {
+    margin-top: 0;
+}
+
+.session-card p {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.session-card .details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.session-card .card-content {
+    flex-grow: 1;
+}
+
+.session-card button.book-ticket {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: auto;
+}
+
+.session-card button.book-ticket:hover {
+    background-color: #45a049;
+}
