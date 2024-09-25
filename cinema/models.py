@@ -4,6 +4,7 @@ from django.db import models
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='media/', null=True)
     description = models.TextField()
     duration = models.DurationField()
     def __str__(self):

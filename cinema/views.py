@@ -4,7 +4,6 @@ from .models import Session
 
 def home(request):
     now = timezone.now()
-    print(now)
 
     Session.objects.filter(start_time__lt=now).delete()
 

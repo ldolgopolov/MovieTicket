@@ -16,9 +16,21 @@ body {
     color: var(--dashboard-text-color, black);
 }
 
-h1 {
+.home-button {
+    display: flex;
+    padding: 10px 20px;
+    text-decoration: none;
+    align-items: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.home-button h1 {
     margin: 0;
     font-size: 24px;
+    color: var(--text-color, black);
+    margin-right: 10px;
 }
 
 .search-form {
@@ -42,19 +54,26 @@ h1 {
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .search-form button:hover {
     background-color: #0056b3;
 }
 
-.theme-toggle {
-    padding: 10px 15px;
+
+.theme-switcher {
+    padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #28a745;
-    color: white;
     cursor: pointer;
+    background-color: var(--theme-switcher-bg-color, #f0f0f0);
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.theme-switcher:hover {
+    background-color: #e8e8e8;
 }
 
 .theme-toggle:hover {
@@ -144,15 +163,6 @@ body.dark tr:hover {
     background-color: #6c757d;
 }
 
-.title-logo {
-    display: flex;
-    align-items: center;
-}
-
-.title-logo h1 {
-    margin-right: 10px;
-}
-
 .cinema-logo {
     width: 50px;
     height: auto;
@@ -179,13 +189,6 @@ body.dark tr:hover {
     background-color: #1f39ff;
 }
 
-.theme-switcher {
-    cursor: pointer;
-    padding: 10px;
-    color: black;
-    background-color: var(--theme-switcher-bg-color, #f0f0f0);
-}
-
 .session-container {
     display: flex;
     flex-wrap: wrap;
@@ -206,6 +209,15 @@ body.dark tr:hover {
     margin: 15px;
     padding: 20px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.session-card img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    margin-right: 20px;
+    margin-bottom: 5px;
 }
 
 .session-card h2 {
@@ -236,6 +248,7 @@ body.dark tr:hover {
     cursor: pointer;
     width: 100%;
     margin-top: auto;
+    transition: background-color 0.3s ease;
 }
 
 .session-card button.book-ticket:hover {

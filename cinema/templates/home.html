@@ -11,10 +11,10 @@
 </head>
 <body>
     <div class="dashboard">
-        <div class="title-logo">
-        <h1>PopCornTime</h1>
-        <img src="{% static 'logo.png' %}" alt="Logo" class="cinema-logo">
-        </div>
+        <a href="{% url 'home' %}" class="home-button">
+            <h1>PopCornTime</h1>
+            <img src="{% static 'logo.png' %}" alt="Logo" class="cinema-logo">
+        </a>
         <div>
             <form method="GET" class="search-form">
             <input type="text" name="search" value="{{ query }}" placeholder="Meklēt pēc filmas nosaukumu">
@@ -30,6 +30,9 @@
         {% for session in sessions %}
             <div class="session-card">
                 <div class="card-content">
+                    <div class="img-container">
+                        <img src="{{ session.movie.image }}" alt="{{ session.movie.title }}">
+                    </div>
                     <h2>{{ session.movie.title }}</h2>
                     <p class="details">
                         <span><strong>Sākums:</strong> {{ session.start_time|date:"H:i" }}</span>
@@ -61,7 +64,6 @@
                 root.style.setProperty('--text-color', 'white');
                 root.style.setProperty('--dashboard-bg-color', 'black');
                 root.style.setProperty('--dashboard-text-color', 'white');
-                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
                 root.style.setProperty('--session-card-bg-color', '#e8e8e8');
                 root.style.setProperty('--theme-switcher-bg-color', 'black');
             } else {
