@@ -1,0 +1,263 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color, white);
+    color: var(--text-color, black);
+}
+
+.dashboard {
+    border-bottom: 2px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--dashboard-bg-color, #f0f0f0);
+    color: var(--dashboard-text-color, black);
+}
+
+.home-button {
+    display: flex;
+    padding: 10px 20px;
+    text-decoration: none;
+    align-items: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.home-button h1 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--text-color, black);
+    margin-right: 10px;
+}
+
+
+.theme-switcher {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--theme-switcher-bg-color, #f0f0f0);
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.theme-switcher:hover {
+    background-color: #e8e8e8;
+}
+
+.theme-toggle:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.session-info {
+    border-bottom: 2px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    color: black;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.session-info-data {
+    display: block;
+    align-items: center;
+    margin: 0 auto;
+    margin-left: 10px;
+}
+
+.session-info-data h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.session-info-image img {
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+body.dark {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+body.dark .dashboard {
+    background-color: #495057;
+}
+
+body.dark .search-form input {
+    background-color: #6c757d;
+    color: #f8f9fa;
+    border: 1px solid #adb5bd;
+}
+
+body.dark .search-form button,
+body.dark .theme-toggle {
+    background-color: #007bff;
+}
+
+body.dark table {
+    background-color: #495057;
+}
+
+body.dark th {
+    background-color: #6c757d;
+}
+
+body.dark tr {
+    border: 1px solid #adb5bd;
+}
+
+body.dark tr:nth-child(even) {
+    background-color: #545b62;
+}
+
+body.dark tr:hover {
+    background-color: #6c757d;
+}
+
+.cinema-logo {
+    width: 50px;
+    height: auto;
+}
+
+
+.dashboard input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.dashboard button {
+    padding: 10px 15px;
+    background-color: #5b8dea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dashboard button:hover {
+    background-color: #1f39ff;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    color: black;
+    background-color: var(--form-container-bg-color, #f9f9f9);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.form-group {
+    justify-content: space-between;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #dee2e6;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    margin: 0 auto;
+}
+
+._failed{ border-bottom: solid 4px red !important; }
+._failed i{  color:red !important;  }
+
+._success {
+    box-shadow: 0 15px 25px #00000019;
+    padding: 45px;
+    width: 100%;
+    text-align: center;
+    margin: 40px auto;
+    border-bottom: solid 4px #28a745;
+}
+
+._success i {
+    font-size: 55px;
+    color: #28a745;
+}
+
+._success h2 {
+    margin-bottom: 12px;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+._success p {
+    margin-bottom: 0px;
+    font-size: 18px;
+    color: #495057;
+    font-weight: 500;
+}

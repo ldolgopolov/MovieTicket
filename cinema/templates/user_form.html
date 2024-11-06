@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'cinema/icon.png' %}" />
+    <title>PopCornTime</title>
+    <link rel="stylesheet" href="{% static 'cinema/css/user_form.css' %}">
+</head>
+<body>
+    <div class="dashboard">
+        <a href="{% url 'home' %}" class="home-button">
+            <h1>PopCornTime</h1>
+            <img src="{% static 'cinema/logo.png' %}" alt="Logo" class="cinema-logo">
+        </a>
+        <div>
+            <label class="theme-switcher" id="theme-toggle-button" onclick="switchTheme()">🌞</label>
+        </div>
+    </div>
+        <div class="form-container">
+            <div class="session-info">
+                <div class="session-info-image">
+                    <img src="{{ session.movie.image.url }}" alt="{{ session.movie.title }}">
+                </div>
+                <div class="session-info-data">
+                    <h1>{{ session.movie.title }}</h1>
+                    <h1>{{ session.start_time|date:"d.m" }}, {{ session.start_time|date:"H:i" }} | PopCornTime, {{ session.hall.name }}</h1>
+                </div>
+            </div>
+            <h2>Aizpildiet informāciju par sevi</h2>
+            <div class='form-group'>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class='submit-button' type="submit">Apstiprināt</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    {% if form.errors %}
+        <div style="color: red;">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <script>
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        
+        function switchTheme() {
+            const root = document.documentElement;
+            const currentTheme = getCookie("theme");
+            const themeButton = document.getElementById("theme-toggle-button");
+        
+            if (currentTheme === "dark") {
+                root.style.setProperty('--bg-color', 'white');
+                root.style.setProperty('--text-color', 'black');
+                root.style.setProperty('--dashboard-bg-color', '#f0f0f0');
+                root.style.setProperty('--dashboard-text-color', 'black');
+                root.style.setProperty('--session-card-bg-color', '#f9f9f9');
+                root.style.setProperty('--theme-switcher-bg-color', '#f0f0f0');
+                setCookie("theme", "light", 7);
+                themeButton.textContent = '🌞'
+            } else {
+                root.style.setProperty('--bg-color', '#696969');
+                root.style.setProperty('--text-color', 'white');
+                root.style.setProperty('--dashboard-bg-color', 'black');
+                root.style.setProperty('--dashboard-text-color', 'white');
+                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
+                root.style.setProperty('--theme-switcher-bg-color', 'black');
+                setCookie("theme", "dark", 7);
+                themeButton.textContent = '🌚'
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const savedTheme = getCookie("theme");
+            const themeButton = document.getElementById("theme-toggle-button");
+        
+            if (savedTheme === "dark") {
+                const root = document.documentElement;
+                root.style.setProperty('--bg-color', '#696969');
+                root.style.setProperty('--text-color', 'white');
+                root.style.setProperty('--dashboard-bg-color', 'black');
+                root.style.setProperty('--dashboard-text-color', 'white');
+                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
+                root.style.setProperty('--theme-switcher-bg-color', 'black');
+                themeButton.textContent = '🌚'
+            }
+        });
+        </script>
+</body>
+</html>

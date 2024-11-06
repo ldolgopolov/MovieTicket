@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{% static 'icon.png' %}" />
+    <link rel="shortcut icon" href="{% static 'cinema/icon.png' %}" />
     <title>PopCornTime</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    
+    <link type="text/css" rel="stylesheet" href="{% static 'cinema/css/home.css' %}">
 </head>
 <body>
     <div class="dashboard">
         <a href="{% url 'home' %}" class="home-button">
             <h1>PopCornTime</h1>
-            <img src="{% static 'logo.png' %}" alt="Logo" class="cinema-logo">
+            <img src="{% static 'cinema/logo.png' %}" alt="Logo" class="cinema-logo">
         </a>
         <div>
             <form method="GET" class="search-form">
@@ -22,7 +21,7 @@
             </form>
         </div>
         <div>
-            <label class="theme-switcher" onclick="switchTheme()">🔄</label>
+            <label class="theme-switcher" id="theme-toggle-button" onclick="switchTheme()">🌞</label>
         </div>
     </div>
     
@@ -31,9 +30,10 @@
             <div class="session-card">
                 <div class="card-content">
                     <div class="img-container">
-                        <img src="{{ session.movie.image }}" alt="{{ session.movie.title }}">
+                        <img src="{{ session.movie.image.url }}" alt="{{ session.movie.title }}">
                     </div>
                     <h2>{{ session.movie.title }}</h2>
+                    <p><strong>Datums:</strong> {{ session.start_time|date:"d.m" }}</p>
                     <p class="details">
                         <span><strong>Sākums:</strong> {{ session.start_time|date:"H:i" }}</span>
                         <span><strong>Beigas:</strong> {{ session.end_time|date:"H:i" }}</span>
@@ -46,7 +46,9 @@
                     <p><strong>Apraksts:</strong></p> 
                     <p>{{ session.movie.description }}</p>
                 </div>
-                <button class="book-ticket">Pirkt biļeti</button>
+                <a href="{% url 'user_form' session.id %}">
+                    <button class="book-ticket">Pirkt biļeti</button>
+                </a>
             </div>
         {% empty %}
             <p>No sessions found.</p>
@@ -54,28 +56,68 @@
     </div>
    
     <script>
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        
         function switchTheme() {
             const root = document.documentElement;
-            const currentBgColor = root.style.getPropertyValue('--bg-color');
-
-            if (currentBgColor === 'white') {
-                
-                root.style.setProperty('--bg-color', '#696969');
-                root.style.setProperty('--text-color', 'white');
-                root.style.setProperty('--dashboard-bg-color', 'black');
-                root.style.setProperty('--dashboard-text-color', 'white');
-                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
-                root.style.setProperty('--theme-switcher-bg-color', 'black');
-            } else {
-                
+            const currentTheme = getCookie("theme");
+            const themeButton = document.getElementById("theme-toggle-button");
+        
+            if (currentTheme === "dark") {
                 root.style.setProperty('--bg-color', 'white');
                 root.style.setProperty('--text-color', 'black');
                 root.style.setProperty('--dashboard-bg-color', '#f0f0f0');
                 root.style.setProperty('--dashboard-text-color', 'black');
                 root.style.setProperty('--session-card-bg-color', '#f9f9f9');
                 root.style.setProperty('--theme-switcher-bg-color', '#f0f0f0');
+                setCookie("theme", "light", 7);
+                themeButton.textContent = '🌞'
+            } else {
+                root.style.setProperty('--bg-color', '#696969');
+                root.style.setProperty('--text-color', 'white');
+                root.style.setProperty('--dashboard-bg-color', 'black');
+                root.style.setProperty('--dashboard-text-color', 'white');
+                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
+                root.style.setProperty('--theme-switcher-bg-color', 'black');
+                setCookie("theme", "dark", 7);
+                themeButton.textContent = '🌚'
             }
         }
-    </script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const savedTheme = getCookie("theme");
+            const themeButton = document.getElementById("theme-toggle-button");
+        
+            if (savedTheme === "dark") {
+                const root = document.documentElement;
+                root.style.setProperty('--bg-color', '#696969');
+                root.style.setProperty('--text-color', 'white');
+                root.style.setProperty('--dashboard-bg-color', 'black');
+                root.style.setProperty('--dashboard-text-color', 'white');
+                root.style.setProperty('--session-card-bg-color', '#e8e8e8');
+                root.style.setProperty('--theme-switcher-bg-color', 'black');
+                themeButton.textContent = '🌚'
+            }
+        });
+        </script>
 </body>
 </html>
